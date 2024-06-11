@@ -23,9 +23,9 @@ fi
 
 # Replace myusb with the actual USB device name
 # Replace myuser with your username
-sudo pamusb-conf --add-device myusb
-sudo pamusb-conf --add-user augustin
-sudo pamusb-conf --link-user augustin myusb
+sudo pamusb-conf -v --add-device myusb
+sudo pamusb-conf -v --add-user augustin
+sudo pamusb-conf -v --link-user augustin myusb
 
 # Modify the PAM configuration
 sudo sh -c 'echo "auth sufficient pam_usb.so" > /tmp/temporaryFile'

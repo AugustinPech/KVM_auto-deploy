@@ -23,7 +23,6 @@ function sendScript {
   scp -o StrictHostKeyChecking=no ./scripts/installPhpFPM8.3.sh "$userName"@"$ipVM":/tmp/
   scp -o StrictHostKeyChecking=no ./scripts/installMariaDB.sh "$userName"@"$ipVM":/tmp/
   scp -o StrictHostKeyChecking=no ./scripts/initVhost.sh "$userName"@"$ipVM":/tmp/
-  scp -o StrictHostKeyChecking=no ./scripts/installPAMAtempt.sh "$userName"@"$ipVM":/tmp/ # tocomment
 }
 function runScript {
   ssh -o StrictHostKeyChecking=no "$userName"@"$ipVM" 'chmod 755 /tmp/install*.sh'
@@ -32,6 +31,11 @@ function runScript {
   ssh -o StrictHostKeyChecking=no "$userName"@"$ipVM" 'bash /tmp/installPhpFPM8.3.sh'
   ssh -o StrictHostKeyChecking=no "$userName"@"$ipVM" 'bash /tmp/installMariaDB.sh'
   ssh -o StrictHostKeyChecking=no "$userName"@"$ipVM" 'bash /tmp/initVhost.sh'
+}
+function PAMUSB {
+  echo "Installing pamusb..."
+  scp -o StrictHostKeyChecking=no ./scripts/installPAMAtempt.sh "$userName"@"$ipVM":/tmp/ # tocomment
+  scp -o StrictHostKeyChecking=no ./scripts/PAMUSBSpecifics.sh.sh "$userName"@"$ipVM":/tmp/ # tocomment
 }
 function sendFiles {
   echo "Sending the files to the VM..."
@@ -43,3 +47,4 @@ sendScript
 runScript
 sendFiles
 echo "You can connect by ssh ""$userName"@"$ipVM"
+PAMUSB # tocomment
